@@ -1,11 +1,18 @@
 import { useForm } from "react-hook-form"
 import { BusquedaIcon } from "./BusquedaIcon"
-useForm
-const Formulario = () => {
 
+interface Datosform {
+  consulta: string
+}
+
+const Formulario = () => {
+  //info para react forms
   const {
-    register: register
-  } = useForm()
+    register: register,
+
+    formState: { errors }
+
+  } = useForm<Datosform>()
 
   return (
     <>
@@ -15,7 +22,7 @@ const Formulario = () => {
             <input type="text"
               placeholder="Buscar Imagenes ..."
               className="w-96 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-300 bg-white"
-              {...register}
+              {...register('consulta', { required: 'bedes incluir una descripciom de la imagem que quieres buscar' })}
             />
             <button
               type="submit"
@@ -23,7 +30,10 @@ const Formulario = () => {
             >
               <BusquedaIcon />
             </button>
-            <p>Error</p>
+            
+            {errors.consulta && (
+              <p>{errors.consulta.message}</p>
+            )}
           </div>
         </form>
       </div>
