@@ -1,23 +1,40 @@
-import { useForm } from "react-hook-form"
+import { useForm, type SubmitHandler } from "react-hook-form"
 import { BusquedaIcon } from "./BusquedaIcon"
+import { userStore } from "../store/store"
 
 interface Datosform {
   consulta: string
 }
 
 const Formulario = () => {
+  //se manda hblaer el userStore - que es el que trabaja la api 
+  const { obtenerData } = userStore()
+
   //info para react forms
   const {
     register: register,
+
+    handleSubmit: manejarEnvio,
+
+    reset: reiniciar,
 
     formState: { errors }
 
   } = useForm<Datosform>()
 
+  //en esta parte se tipa el envio y envia a la api
+  const funcionEnvio: SubmitHandler<Datosform> = (datos) => {
+    userStore.setState({ entrada: datos.consulta })
+
+    obtenerData()
+    reiniciar()
+  }
+
+
   return (
     <>
       <div className="flex flex-col items-center">
-        <form action="">
+        <form onSubmit={manejarEnvio(funcionEnvio)}>
           <div className="relative">
             <input type="text"
               placeholder="Buscar Imagenes ..."
@@ -30,7 +47,7 @@ const Formulario = () => {
             >
               <BusquedaIcon />
             </button>
-            
+
             {errors.consulta && (
               <p>{errors.consulta.message}</p>
             )}
