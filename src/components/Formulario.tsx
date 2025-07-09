@@ -8,7 +8,7 @@ interface Datosform {
 
 const Formulario = () => {
   //se manda hblaer el userStore - que es el que trabaja la api 
-  const { obtenerData } = userStore()
+  const { obtenerDatos,establecerEntrada } = userStore()
 
   //info para react forms
   const {
@@ -24,9 +24,9 @@ const Formulario = () => {
 
   //en esta parte se tipa el envio y envia a la api
   const funcionEnvio: SubmitHandler<Datosform> = (datos) => {
-    userStore.setState({ entrada: datos.consulta })
-
-    obtenerData()
+    // userStore.setState({ entrada: datos.consulta })
+    establecerEntrada(datos.consulta)
+    obtenerDatos()
     reiniciar()
   }
 

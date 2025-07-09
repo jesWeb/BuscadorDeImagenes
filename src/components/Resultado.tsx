@@ -1,5 +1,6 @@
 import { userStore } from "../store/store"
 import type { Fotos } from "../types"
+import Pagination from "./Pagination"
 
 const Resultado = () => {
 
@@ -15,7 +16,7 @@ const Resultado = () => {
           resultados.map((foto: Fotos) => (
             <div key={foto.id}>
               <div className="rounded overflow-hidden shadow-lg bg-amber-100">
-                <img className="w-full" src={foto.urls.small} alt={foto.alt_description} />
+                <img className="w-full h-150 object-cover" src={foto.urls.small} alt={foto.alt_description} />
               </div>
               <div className="px-6 py-4">
                 <div className="font-bold text-xl mb-2.5">{foto.user.name} {foto.user.last_name}</div>
@@ -25,6 +26,7 @@ const Resultado = () => {
           ))
         ) : (<><p className="text-center col-span-4 text-gray-400 text-xl">No se han encontraron resultados</p></>)}
       </div>
+      <Pagination />
     </div>
   )
 }

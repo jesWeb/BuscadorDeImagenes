@@ -8,24 +8,26 @@ export const userStore = create<stateStore>((set, get) => ({
     //estado inicial
     entrada: '',
     resultado: [],
-
+    pagina: 1,
+    totalPaginas: 0,
     //obtener datos
 
-    obtenerData: async () => {
-        const { entrada } = get()
+    obtenerDatos: async () => {
+        const { entrada, pagina } = get()
 
         try {
 
             const response = await axios.get('https://api.unsplash.com/search/photos', {
-                params: { query: entrada, per_page: 9 },
+                params: { query: entrada, pagina: pagina, per_page: 10 },
                 headers: { Authorization: `Client-ID 6J1hwHn-fSvEVqKwcXwqU2TzlMTRMrW_IrvD8y6zVKg` }
             })
 
             set({
-                resultado: response.data.results
+                resultado: response.data.results,
+                totalPaginas: response.data.total_pages
             })
 
-            console.log('que info llega de la api', response);
+            console.log('que info llega de la api', response, 'estamos en la pagina', pagina)
 
 
         } catch (error) {
@@ -34,10 +36,18 @@ export const userStore = create<stateStore>((set, get) => ({
         }
 
 
+    },
+
+    establecerPagina: (numero: number) => {
+        set({ pagina: numero })
+        get().obtenerDatos()
+    },
+
+    establecerEntrada: (busqueda: string) => {
+        set({
+            entrada: busqueda,
+            pagina: 1
+        })
     }
-
-
-
-
 }))
 

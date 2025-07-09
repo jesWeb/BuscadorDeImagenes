@@ -21,5 +21,9 @@ export interface Fotos {
 export interface stateStore {
     entrada: string
     resultado: Fotos[]
-    obtenerData: () => Promise<void>
+    pagina: number
+    totalPaginas: number
+    obtenerDatos: () => Promise<void>
+    establecerPagina: (numero: number) => void
+    establecerEntrada: (busqueda: string) => void
 }
