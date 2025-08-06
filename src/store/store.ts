@@ -18,8 +18,8 @@ export const userStore = create<stateStore>((set, get) => ({
         try {
 
             const response = await axios.get('https://api.unsplash.com/search/photos', {
-                params: { query: entrada, pagina: pagina, per_page: 10 },
-                headers: { Authorization: `Client-ID 6J1hwHn-fSvEVqKwcXwqU2TzlMTRMrW_IrvD8y6zVKg` }
+                params: { query: entrada, page: pagina, per_page: 10 },
+                headers: { Authorization: `Client-ID ${import.meta.env.VITE_UNSPLASH_API}` }
             })
 
             set({

@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { userStore } from "../store/store"
 
 const Pagination = () => {
@@ -7,7 +8,7 @@ const Pagination = () => {
     const establecerPagina = userStore((state) => state.establecerPagina);
 
     const grupoImagenes = 5;
-    const grupoActual = Math.floor(pagina - 1 / grupoImagenes);
+    const grupoActual = Math.floor((pagina - 1) / grupoImagenes);
     console.log('Estoy en el grupo actual', grupoActual);
 
     const paginaInicio = grupoActual * grupoImagenes + 1;
@@ -16,14 +17,21 @@ const Pagination = () => {
     const paginaFin = Math.min(totalPaginas, paginaInicio + grupoImagenes - 1);
     console.log('La pagina final es ', paginaFin);
 
-    const numerosPaginas: number[] = [];
+    const numeroPaginas = useMemo(() => {
 
-    for (let i = paginaInicio; i <= paginaFin; i++) {
-        numerosPaginas.push(i)
+        const arregloPaginas: number[] = [];
 
-    }
+        for (let i = paginaInicio; i <= paginaFin; i++) {
+            arregloPaginas.push(i)
 
-    // console.log('arreglo de numero de paginas', numerosPaginas);
+        }
+
+        return arregloPaginas
+    }, [paginaInicio, pagina])
+
+
+
+    console.log('arreglo de numero de paginas', numeroPaginas);
 
 
     return (
@@ -39,7 +47,7 @@ const Pagination = () => {
                         }
                     }}
                     disabled={pagina <= 1}
-                    className="px-4 py-2.5  text-white  bg-blue-500 rounded disabled:opacity-45 cursor-pointer">
+                    className="px-4 py-2.5 mr-2  text-white  bg-blue-500 rounded disabled:opacity-45 cursor-pointer">
                     Anterior
                 </button>
 
@@ -58,7 +66,7 @@ const Pagination = () => {
                 )}
 
 
-                {numerosPaginas.map((num) => (
+                {numeroPaginas.map((num) => (
                     <button
                         key={num}
                         onClick={() => { establecerPagina(num), window.scrollTo({ top: 0, behavior: 'smooth' }) }}
@@ -84,7 +92,7 @@ const Pagination = () => {
                 )}
 
 
-                {/* posterior */}
+
                 <button
                     onClick={() => {
                         if (pagina < totalPaginas) {

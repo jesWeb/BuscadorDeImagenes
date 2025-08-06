@@ -8,7 +8,7 @@ interface Datosform {
 
 const Formulario = () => {
   //se manda hblaer el userStore - que es el que trabaja la api 
-  const { obtenerDatos,establecerEntrada } = userStore()
+  const { obtenerDatos, establecerEntrada } = userStore()
 
   //info para react forms
   const {
@@ -49,7 +49,9 @@ const Formulario = () => {
             </button>
 
             {errors.consulta && (
-              <p>{errors.consulta.message}</p>
+              <p
+                className="text-white bg-red-600 font-bold text-sm mt-2 rounded p-2"
+              >{errors.consulta.message}</p>
             )}
           </div>
         </form>
