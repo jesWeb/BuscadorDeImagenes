@@ -1,70 +1,73 @@
-# React + TypeScript + Vite
+# 🖼️ Buscador de Imágenes
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Buscador de Imágenes es una aplicación web desarrollada con **React**, **TypeScript**, **Vite** y **Zustand**, que permite buscar imágenes utilizando la API de Unsplash. El usuario puede ingresar una consulta, navegar entre los resultados paginados y ver detalles de cada imagen encontrada.
 
-Currently, two official plugins are available:
+## ✨ Características
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 🔍 Búsqueda de imágenes en Unsplash por palabra clave.
+- 🖼️ Visualización de resultados en una cuadrícula responsiva.
+- 📄 Paginación avanzada para navegar entre los resultados.
+- 🗂️ Manejo de estado global con Zustand.
+- ✅ Validación de formularios con React Hook Form.
+- 🎨 Estilos modernos con TailwindCSS.
 
-## Expanding the ESLint configuration
+## 🚀 Instalación
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. Clona el repositorio:
+   ```sh
+   git clone https://github.com/tu-usuario/buscador-imagenes.git
+   cd buscador-imagenes
+   ```
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+2. Instala las dependencias:
+   ```sh
+   npm install
+   ```
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+3. Crea un archivo `.env` en la raíz del proyecto y agrega tu clave de API de Unsplash:
+   ```
+   VITE_UNSPLASH_API='TU_API_KEY'
+   ```
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+4. Inicia el servidor de desarrollo:
+   ```sh
+   npm run dev
+   ```
+
+## 📦 Scripts disponibles
+
+- `npm run dev` — Inicia el servidor de desarrollo.
+- `npm run build` — Compila la aplicación para producción.
+- `npm run preview` — Previsualiza la aplicación de producción.
+- `npm run lint` — Ejecuta ESLint para analizar el código.
+
+## 🗂️ Estructura del proyecto
+
+```
+src/
+  components/      # Componentes reutilizables (Formulario, Resultado, Pagination, etc.)
+  store/           # Estado global con Zustand
+  types/           # Tipos TypeScript
+  assets/          # Imágenes y recursos estáticos
+  App.tsx          # Componente principal
+  main.tsx         # Punto de entrada de la app
+  index.css        # Estilos globales (TailwindCSS)
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🛠️ Tecnologías utilizadas
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- [⚛️ React](https://react.dev/)
+- [🟦 TypeScript](https://www.typescriptlang.org/)
+- [⚡ Vite](https://vitejs.dev/)
+- [🐻 Zustand](https://zustand-demo.pmnd.rs/)
+- [📝 React Hook Form](https://react-hook-form.com/)
+- [💨 TailwindCSS](https://tailwindcss.com/)
+- [📷 Unsplash API](https://unsplash.com/developers)
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-"# BuscadorDeImagenes" 
+## 📄 Licencia
+
+MIT
+
+---
+
+> Proyecto realizado como práctica de consumo de APIs y manejo de
